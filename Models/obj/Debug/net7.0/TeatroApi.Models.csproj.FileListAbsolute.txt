@@ -1,0 +1,11 @@
+C:\Users\Marcos casa\Desktop\Reto-GS-BACK\Reto-GS2-Backend\Models\bin\Debug\net7.0\TeatroApi.Models.deps.json
+C:\Users\Marcos casa\Desktop\Reto-GS-BACK\Reto-GS2-Backend\Models\bin\Debug\net7.0\TeatroApi.Models.dll
+C:\Users\Marcos casa\Desktop\Reto-GS-BACK\Reto-GS2-Backend\Models\bin\Debug\net7.0\TeatroApi.Models.pdb
+C:\Users\Marcos casa\Desktop\Reto-GS-BACK\Reto-GS2-Backend\Models\obj\Debug\net7.0\TeatroApi.Models.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Marcos casa\Desktop\Reto-GS-BACK\Reto-GS2-Backend\Models\obj\Debug\net7.0\TeatroApi.Models.AssemblyInfoInputs.cache
+C:\Users\Marcos casa\Desktop\Reto-GS-BACK\Reto-GS2-Backend\Models\obj\Debug\net7.0\TeatroApi.Models.AssemblyInfo.cs
+C:\Users\Marcos casa\Desktop\Reto-GS-BACK\Reto-GS2-Backend\Models\obj\Debug\net7.0\TeatroApi.Models.csproj.CoreCompileInputs.cache
+C:\Users\Marcos casa\Desktop\Reto-GS-BACK\Reto-GS2-Backend\Models\obj\Debug\net7.0\TeatroApi.Models.dll
+C:\Users\Marcos casa\Desktop\Reto-GS-BACK\Reto-GS2-Backend\Models\obj\Debug\net7.0\refint\TeatroApi.Models.dll
+C:\Users\Marcos casa\Desktop\Reto-GS-BACK\Reto-GS2-Backend\Models\obj\Debug\net7.0\TeatroApi.Models.pdb
+C:\Users\Marcos casa\Desktop\Reto-GS-BACK\Reto-GS2-Backend\Models\obj\Debug\net7.0\ref\TeatroApi.Models.dll
