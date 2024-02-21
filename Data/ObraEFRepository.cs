@@ -5,9 +5,9 @@ namespace TeatroApi.Data
 {
     public class ObraEFRepository : IObraRepository
     {
-        private readonly ObraContext _context;
+        private readonly TeatroContext _context;
 
-        public ObraEFRepository(ObraContext context)
+        public ObraEFRepository(TeatroContext context)
         {
             _context = context;
         }
@@ -19,7 +19,7 @@ namespace TeatroApi.Data
 
         public Obra Get(int obraId)
         {
-            return _context.Obra.FirstOrDefault(obra => obra.Id == obraId);
+            return _context.Obra.FirstOrDefault(obra => obra.IdPlay== obraId);
         }
 
         public void Update(Obra obra)

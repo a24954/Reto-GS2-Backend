@@ -15,7 +15,7 @@ builder.Services.AddSwaggerGen();
 
 var connectionString = builder.Configuration.GetConnectionString("ServerDB");
 
-builder.Services.AddDbContext<ObraContext>(options =>
+builder.Services.AddDbContext<TeatroContext>(options =>
     options.UseSqlServer(connectionString));
 
 builder.Services.AddScoped<IObraRepository, ObraEFRepository>();

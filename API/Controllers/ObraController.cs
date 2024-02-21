@@ -36,13 +36,13 @@ namespace TeatroApi.API.Controllers
         public IActionResult Create(Obra obra)
         {
             _obraService.Add(obra);
-            return CreatedAtAction(nameof(Get), new { id = obra.Id }, obra);
+            return CreatedAtAction(nameof(Get), new { id = obra.IdPlay }, obra);
         }
 
         [HttpPut("{id}")]
         public IActionResult Update(int id, Obra obra)
         {
-            if (id != obra.Id)
+            if (id != obra.IdPlay)
                 return BadRequest();
 
             var existingObra = _obraService.Get(id);

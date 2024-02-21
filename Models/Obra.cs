@@ -6,7 +6,7 @@ namespace TeatroApi.Models;
 public class Obra
 {
     [Key]
-    public int Id { get; set; }
+    public int IdPlay { get; set; }
     [Required]
     public string? Name { get; set; }
     [Required]
