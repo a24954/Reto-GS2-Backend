@@ -33,8 +33,8 @@ namespace TeatroApi.Data
             );
             modelBuilder.Entity<Asientos>().HasData(
                 new Asientos { IdSeats = 1, Number = 1, Status = true },
-                new Asientos { IdSeats = 1, Number = 2, Status = false },
-                new Asientos { IdSeats = 1, Number = 3, Status = true }
+                new Asientos { IdSeats = 2, Number = 2, Status = false },
+                new Asientos { IdSeats = 3, Number = 3, Status = true }
             );
             var listaasientos = new List<Asientos>();
             modelBuilder.Entity<Sesion>().HasData(

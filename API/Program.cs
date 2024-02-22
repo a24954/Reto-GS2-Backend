@@ -21,6 +21,18 @@ builder.Services.AddDbContext<TeatroContext>(options =>
 builder.Services.AddScoped<IObraRepository, ObraEFRepository>();
 builder.Services.AddScoped<IObraService, ObraService>();
 
+builder.Services.AddScoped<IUsuarioRepository, UsuarioEFRepository>();
+builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+
+builder.Services.AddScoped<IAsientosRepository, AsientosEFRepository>();
+builder.Services.AddScoped<IAsientosService, AsientosService>();
+
+builder.Services.AddScoped<IReservaRepository, ReservaEFRepository>();
+builder.Services.AddScoped<IReservaService, ReservaService>();
+
+builder.Services.AddScoped<ISesionRepository, SesionEFRepository>();
+builder.Services.AddScoped<ISesionService, SesionService>();
+
 var app = builder.Build();
 
 app.UseSwagger();
