@@ -15,9 +15,10 @@ namespace TeatroApi.Data
         public void Add(Asientos asientos)
         {
             _context.Asientos.Add(asientos);
+            SaveChanges();
         }
 
-        public Asientos Get(int asientosId)
+        public Asientos? Get(int asientosId)
         {
             return _context.Asientos.FirstOrDefault(asientos => asientos.IdSeats == asientosId);
         }

@@ -15,9 +15,10 @@ namespace TeatroApi.Data
         public void Add(Sesion sesion)
         {
             _context.Sesion.Add(sesion);
+            SaveChanges();
         }
 
-        public Sesion Get(int sesionId)
+        public Sesion? Get(int sesionId)
         {
             return _context.Sesion.FirstOrDefault(sesion => sesion.IdSesion == sesionId);
         }

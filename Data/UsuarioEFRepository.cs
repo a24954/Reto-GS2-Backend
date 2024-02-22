@@ -15,9 +15,10 @@ namespace TeatroApi.Data
         public void Add(Usuario usuario)
         {
             _context.Usuario.Add(usuario);
+            SaveChanges();
         }
 
-        public Usuario Get(int usuarioId)
+        public Usuario? Get(int usuarioId)
         {
             return _context.Usuario.FirstOrDefault(usuario => usuario.IdUser == usuarioId);
         }

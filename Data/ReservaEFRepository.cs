@@ -15,9 +15,10 @@ namespace TeatroApi.Data
         public void Add(Reserva reserva)
         {
             _context.Reserva.Add(reserva);
+            SaveChanges();
         }
 
-        public Reserva Get(int reservaId)
+        public Reserva? Get(int reservaId)
         {
             return _context.Reserva.FirstOrDefault(reserva => reserva.IdReservation == reservaId);
         }

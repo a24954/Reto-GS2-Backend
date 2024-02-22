@@ -7,10 +7,11 @@ namespace TeatroApi.Business
     {
         private readonly IObraRepository _obraRepository;
 
-        public ObraService(IObraRepository obraRepository){
+        public ObraService(IObraRepository obraRepository)
+        {
 
             _obraRepository = obraRepository;
-            
+
         }
         public List<Obra> GetAll() => _obraRepository.GetAll();
 
