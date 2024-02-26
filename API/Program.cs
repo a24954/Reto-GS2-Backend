@@ -41,10 +41,6 @@ app.UseSwaggerUI(c =>
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Your API v1");
 });
 
-app.UseAuthorization();
-app.MapControllers();
-app.Run();
-
 app.UseCors(options =>
 {
     options.WithOrigins("http://localhost:5173")
@@ -52,3 +48,8 @@ app.UseCors(options =>
            .AllowAnyHeader()
            .AllowCredentials();
 });
+
+app.UseAuthorization();
+app.MapControllers();
+app.Run();
+
