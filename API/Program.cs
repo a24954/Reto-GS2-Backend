@@ -44,3 +44,11 @@ app.UseSwaggerUI(c =>
 app.UseAuthorization();
 app.MapControllers();
 app.Run();
+
+app.UseCors(options =>
+{
+    options.WithOrigins("http://localhost:5173")
+           .AllowAnyMethod()
+           .AllowAnyHeader()
+           .AllowCredentials();
+});
