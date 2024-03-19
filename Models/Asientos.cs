@@ -11,6 +11,11 @@ public class Asientos
     public int Number { get; set; }
     [Required]
     public bool Status { get; set; }
-    public Asientos(){}
-    
+}
+
+public class AsientosReserva
+{
+    [ForeignKey("Reserva")]
+    public int IdReservation { get; set; }
+    public Reserva Reserva { get; set; }
 }

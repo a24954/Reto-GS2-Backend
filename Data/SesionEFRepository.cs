@@ -14,13 +14,13 @@ namespace TeatroApi.Data
 
         public void Add(Sesion sesion)
         {
-            _context.Sesion.Add(sesion);
+            _context.Sesiones.Add(sesion);
             SaveChanges();
         }
 
         public Sesion? Get(int sesionId)
         {
-            return _context.Sesion.FirstOrDefault(sesion => sesion.IdSesion == sesionId);
+            return _context.Sesiones.FirstOrDefault(sesion => sesion.IdSesion == sesionId);
         }
 
         public void Update(Sesion sesion)
@@ -33,7 +33,7 @@ namespace TeatroApi.Data
             if (sesion is null) {
                 throw new KeyNotFoundException("Account not found.");
             }
-            _context.Sesion.Remove(sesion);
+            _context.Sesiones.Remove(sesion);
             SaveChanges();
 
         }
@@ -46,7 +46,7 @@ namespace TeatroApi.Data
 
         public List<Sesion> GetAll()
         {
-            return _context.Sesion.ToList();
+            return _context.Sesiones.ToList();
 
         }
     }   

@@ -11,5 +11,7 @@ public class Sesion
     public List<Asientos> Seats { get; set; }
     [Required]
     public DateTime SesionTime { get; set; }
-
+    [ForeignKey("Obra")]
+    public int IdPlay { get; set; }
+    public virtual Obra Obra { get; set; }
 }

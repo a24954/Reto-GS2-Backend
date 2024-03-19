@@ -14,13 +14,13 @@ namespace TeatroApi.Data
 
         public void Add(Reserva reserva)
         {
-            _context.Reserva.Add(reserva);
+            _context.Reservas.Add(reserva);
             SaveChanges();
         }
 
         public Reserva? Get(int reservaId)
         {
-            return _context.Reserva.FirstOrDefault(reserva => reserva.IdReservation == reservaId);
+            return _context.Reservas.FirstOrDefault(reserva => reserva.IdReservation == reservaId);
         }
 
         public void Update(Reserva reserva)
@@ -33,7 +33,7 @@ namespace TeatroApi.Data
             if (reserva is null) {
                 throw new KeyNotFoundException("Account not found.");
             }
-            _context.Reserva.Remove(reserva);
+            _context.Reservas.Remove(reserva);
             SaveChanges();
 
         }
@@ -46,7 +46,7 @@ namespace TeatroApi.Data
 
         public List<Reserva> GetAll()
         {
-            return _context.Reserva.ToList();
+            return _context.Reservas.ToList();
 
         }
     }   

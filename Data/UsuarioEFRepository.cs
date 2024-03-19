@@ -14,13 +14,13 @@ namespace TeatroApi.Data
 
         public void Add(Usuario usuario)
         {
-            _context.Usuario.Add(usuario);
+            _context.Usuarios.Add(usuario);
             SaveChanges();
         }
 
         public Usuario? Get(int usuarioId)
         {
-            return _context.Usuario.FirstOrDefault(usuario => usuario.IdUser == usuarioId);
+            return _context.Usuarios.FirstOrDefault(usuario => usuario.IdUser == usuarioId);
         }
 
         public void Update(Usuario usuario)
@@ -33,7 +33,7 @@ namespace TeatroApi.Data
             if (usuario is null) {
                 throw new KeyNotFoundException("Account not found.");
             }
-            _context.Usuario.Remove(usuario);
+            _context.Usuarios.Remove(usuario);
             SaveChanges();
 
         }
@@ -46,7 +46,7 @@ namespace TeatroApi.Data
 
         public List<Usuario> GetAll()
         {
-            return _context.Usuario.ToList();
+            return _context.Usuarios.ToList();
 
         }
     }   

@@ -14,13 +14,13 @@ namespace TeatroApi.Data
 
         public void Add(Obra obra)
         {
-            _context.Obra.Add(obra);
+            _context.Obras.Add(obra);
             SaveChanges();
         }
 
         public Obra? Get(int obraId)
         {
-            return _context.Obra.FirstOrDefault(obra => obra.IdPlay == obraId);
+            return _context.Obras.FirstOrDefault(obra => obra.IdPlay == obraId);
         }
 
 
@@ -36,7 +36,7 @@ namespace TeatroApi.Data
             {
                 throw new KeyNotFoundException("Account not found.");
             }
-            _context.Obra.Remove(obra);
+            _context.Obras.Remove(obra);
             SaveChanges();
 
         }
@@ -49,7 +49,7 @@ namespace TeatroApi.Data
 
         public List<Obra> GetAll()
         {
-            return _context.Obra.ToList();
+            return _context.Obras.ToList();
 
         }
     }

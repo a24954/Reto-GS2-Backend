@@ -86,38 +86,37 @@ namespace TeatroApi.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Price")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("IdPlay");
 
-                    b.ToTable("Obra");
+                    b.ToTable("Obras");
 
                     b.HasData(
                         new
                         {
                             IdPlay = 1,
-                            Description = "La mejor obra",
+                            Description = "Una descripción",
                             Name = "Lalaland",
                             Photo = "https://picsum.photos/200/300",
-                            Price = "100"
+                            Price = 100m
                         },
                         new
                         {
                             IdPlay = 2,
-                            Description = "La mejor obra",
+                            Description = "Otra descripción",
                             Name = "Los 100",
                             Photo = "https://picsum.photos/200/300",
-                            Price = "300"
+                            Price = 300m
                         },
                         new
                         {
                             IdPlay = 3,
-                            Description = "La mejor obra",
+                            Description = "Otra más",
                             Name = "Fiesta",
                             Photo = "https://picsum.photos/200/300",
-                            Price = "200"
+                            Price = 200m
                         });
                 });
 
@@ -129,12 +128,14 @@ namespace TeatroApi.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdReservation"));
 
-                    b.Property<int>("Id_Obra")
+                    b.Property<int>("IdPlay")
                         .HasColumnType("int");
 
-                    b.Property<string>("ReservationDate")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("IdUser")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ReservationDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("ReservationPrice")
                         .IsRequired()
@@ -146,32 +147,39 @@ namespace TeatroApi.Data.Migrations
 
                     b.HasKey("IdReservation");
 
-                    b.ToTable("Reserva");
+                    b.HasIndex("IdPlay");
+
+                    b.HasIndex("IdUser");
+
+                    b.ToTable("Reservas");
 
                     b.HasData(
                         new
                         {
                             IdReservation = 1,
-                            IdObra = 1,
-                            ReservationDate = "https://picsum.photos/200/300",
-                            ReservationPrice = "La mejor obra",
-                            UserEmail = "Lalaland"
+                            IdPlay = 1,
+                            IdUser = 1,
+                            ReservationDate = new DateTime(2024, 3, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReservationPrice = "100",
+                            UserEmail = "user1@example.com"
                         },
                         new
                         {
                             IdReservation = 2,
-                            IdObra = 2,
-                            ReservationDate = "https://picsum.photos/200/300",
-                            ReservationPrice = "La mejor obra",
-                            UserEmail = "Los 100"
+                            IdPlay = 2,
+                            IdUser = 2,
+                            ReservationDate = new DateTime(2024, 3, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReservationPrice = "200",
+                            UserEmail = "user2@example.com"
                         },
                         new
                         {
                             IdReservation = 3,
-                            IdObra = 3,
-                            ReservationDate = "https://picsum.photos/200/300",
-                            ReservationPrice = "La mejor obra",
-                            UserEmail = "Fiesta"
+                            IdPlay = 3,
+                            IdUser = 3,
+                            ReservationDate = new DateTime(2024, 3, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReservationPrice = "300",
+                            UserEmail = "user3@example.com"
                         });
                 });
 
@@ -183,28 +191,36 @@ namespace TeatroApi.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdSesion"));
 
+                    b.Property<int>("IdPlay")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("SesionTime")
                         .HasColumnType("datetime2");
 
                     b.HasKey("IdSesion");
 
-                    b.ToTable("Sesion");
+                    b.HasIndex("IdPlay");
+
+                    b.ToTable("Sesiones");
 
                     b.HasData(
                         new
                         {
                             IdSesion = 1,
-                            SesionTime = new DateTime(1, 1, 1, 10, 0, 0, 0, DateTimeKind.Unspecified)
+                            IdPlay = 1,
+                            SesionTime = new DateTime(2024, 3, 20, 10, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             IdSesion = 2,
-                            SesionTime = new DateTime(1, 1, 1, 10, 30, 0, 0, DateTimeKind.Unspecified)
+                            IdPlay = 2,
+                            SesionTime = new DateTime(2024, 3, 21, 10, 30, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             IdSesion = 3,
-                            SesionTime = new DateTime(1, 1, 1, 20, 30, 0, 0, DateTimeKind.Unspecified)
+                            IdPlay = 3,
+                            SesionTime = new DateTime(2024, 3, 22, 20, 30, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 
@@ -233,7 +249,7 @@ namespace TeatroApi.Data.Migrations
 
                     b.HasKey("IdUser");
 
-                    b.ToTable("Usuario");
+                    b.ToTable("Usuarios");
 
                     b.HasData(
                         new
@@ -269,9 +285,51 @@ namespace TeatroApi.Data.Migrations
                         .HasForeignKey("SesionIdSesion");
                 });
 
+            modelBuilder.Entity("TeatroApi.Models.Reserva", b =>
+                {
+                    b.HasOne("TeatroApi.Models.Obra", "Obra")
+                        .WithMany("Reservas")
+                        .HasForeignKey("IdPlay")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TeatroApi.Models.Usuario", "Usuario")
+                        .WithMany("Reservas")
+                        .HasForeignKey("IdUser")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Obra");
+
+                    b.Navigation("Usuario");
+                });
+
+            modelBuilder.Entity("TeatroApi.Models.Sesion", b =>
+                {
+                    b.HasOne("TeatroApi.Models.Obra", "Obra")
+                        .WithMany("Sesiones")
+                        .HasForeignKey("IdPlay")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Obra");
+                });
+
+            modelBuilder.Entity("TeatroApi.Models.Obra", b =>
+                {
+                    b.Navigation("Reservas");
+
+                    b.Navigation("Sesiones");
+                });
+
             modelBuilder.Entity("TeatroApi.Models.Sesion", b =>
                 {
                     b.Navigation("Seats");
+                });
+
+            modelBuilder.Entity("TeatroApi.Models.Usuario", b =>
+                {
+                    b.Navigation("Reservas");
                 });
 #pragma warning restore 612, 618
         }

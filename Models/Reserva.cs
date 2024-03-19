@@ -8,12 +8,18 @@ public class Reserva
     [Key]
     public int IdReservation { get; set; }
     [Required]
-    public string? User_Email { get; set; }
+    public string User_Email { get; set; }
     [Required]
-    public string? ReservationPrice { get; set; }
+    public string ReservationPrice { get; set; }
     [Required]
-    public string? ReservationDate { get; set; }
-    [Required]
-    public int Id_Obra { get; set; }
-    
+    public DateTime ReservationDate { get; set; }
+
+    [ForeignKey("Usuario")]
+    public int IdUser { get; set; }
+    public virtual Usuario Usuario { get; set; }
+
+    [ForeignKey("Obra")]
+    public int IdPlay { get; set; }
+    public virtual Obra Obra { get; set; }
+
 }
