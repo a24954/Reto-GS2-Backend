@@ -14,8 +14,13 @@ public class Obra
     [Required]
     public string  ? Photo { get; set; }
     [Required]
+    public string  ? Duration { get; set; }
+    [Required]
     public decimal Price { get; set; }
-
-    public virtual ICollection<Sesion> Sesiones { get; set; }
+    [Required]
+    public DateTime  ? Date { get; set; }
+    [Required]
+    public virtual ICollection<Sesion> Sesiones { get; set; } = new List<Sesion>(); 
     public virtual ICollection<Reserva> Reservas { get; set; } = new List<Reserva>(); 
+    public virtual ICollection<Asientos> Asientos { get; set; } = new List<Asientos>(); 
 }

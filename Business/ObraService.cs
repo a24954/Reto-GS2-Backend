@@ -1,5 +1,6 @@
 ﻿using TeatroApi.Data;
 using TeatroApi.Models;
+using TeatroAPI.DTOs;
 
 namespace TeatroApi.Business
 {
@@ -15,7 +16,7 @@ namespace TeatroApi.Business
         }
         public List<Obra> GetAll() => _obraRepository.GetAll();
 
-        public Obra? Get(int id) => _obraRepository.Get(id);
+        public ObraSimpleDto? Get(int id) => _obraRepository.Get(id);
 
         public void Add(Obra obra) => _obraRepository.Add(obra);
 

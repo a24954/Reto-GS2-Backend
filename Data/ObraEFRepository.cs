@@ -1,5 +1,6 @@
 using TeatroApi.Models;
 using Microsoft.EntityFrameworkCore;
+using TeatroAPI.DTOs;
 
 namespace TeatroApi.Data
 {
@@ -18,9 +19,31 @@ namespace TeatroApi.Data
             SaveChanges();
         }
 
-        public Obra? Get(int obraId)
+        public ObraSimpleDto? Get(int obraId)
         {
-            return _context.Obras.FirstOrDefault(obra => obra.IdPlay == obraId);
+
+            var sesiones = _context.Sesiones
+            .Where(sesiones => sesiones.IdSesion == obraId)
+            .Select(u => new SesionSimpleDto
+            {
+                IdSesion = u.IdSesion,
+                SesionTime = u.SesionTime
+
+            }).FirstOrDefault();
+
+            var obra = _context.Obras
+            .Where(obra => obra.IdPlay == obraId)
+            .Select(r => new ObraSimpleDto
+            {
+                IdPlay = r.IdPlay,
+                Name = r.Name,
+                Photo = r.Photo,
+                Price = r.Price,
+                Duration = r.Duration,
+                Sesion = sesiones
+            }).FirstOrDefault();
+
+            return obra;
         }
 
 
@@ -31,7 +54,7 @@ namespace TeatroApi.Data
 
         public void Delete(int obraId)
         {
-            var obra = Get(obraId);
+            var obra = _context.Obras.Find(obraId);
             if (obra is null)
             {
                 throw new KeyNotFoundException("Account not found.");

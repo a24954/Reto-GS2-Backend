@@ -14,11 +14,9 @@ public class Reserva
     [Required]
     public DateTime ReservationDate { get; set; }
 
-    [ForeignKey("Usuario")]
     public int IdUser { get; set; }
     public virtual Usuario Usuario { get; set; }
 
-    [ForeignKey("Obra")]
     public int IdPlay { get; set; }
     public virtual Obra Obra { get; set; }
 

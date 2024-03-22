@@ -8,10 +8,10 @@ public class Sesion
     [Key]
     public int IdSesion { get; set; }
     [Required]
-    public List<Asientos> Seats { get; set; }
+    public List<Asientos> Seats { get; set; } = new List<Asientos>(); 
     [Required]
-    public DateTime SesionTime { get; set; }
-    [ForeignKey("Obra")]
+    public string SesionTime { get; set; }
     public int IdPlay { get; set; }
     public virtual Obra Obra { get; set; }
+    public int IdSeats { get; set; }
 }

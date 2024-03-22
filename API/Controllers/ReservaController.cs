@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using TeatroApi.Data;
 using TeatroApi.Models;
 using TeatroApi.Business;
+using TeatroAPI.DTOs;
 
 namespace TeatroApi.API.Controllers
 {
@@ -22,7 +23,7 @@ namespace TeatroApi.API.Controllers
             _reservaService.GetAll();
 
         [HttpGet("{id}")]
-        public ActionResult<Reserva> Get(int id)
+        public ActionResult<ReservaSimpleDto> Get(int id)
         {
             var reserva = _reservaService.Get(id);
 

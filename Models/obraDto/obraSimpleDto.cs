@@ -6,5 +6,9 @@ namespace TeatroAPI.DTOs
         public string? Name { get; set; }
         public string? Photo { get; set; }
         public decimal Price { get; set; }
+        public string? Duration { get; set; }
+
+        public SesionSimpleDto Sesion { get; set; }
+
     }
 }

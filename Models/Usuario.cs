@@ -20,7 +20,7 @@ public class Usuario
 
         public enum UserRole
         {
-            Admin,
-            StandardUser
+            Admin = 1,
+            StandardUser = 2
         }
 }

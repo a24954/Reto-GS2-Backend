@@ -20,25 +20,39 @@ namespace TeatroApi.Data
                 .HasForeignKey(r => r.IdUser);
 
             modelBuilder.Entity<Reserva>()
-                .HasOne(r => r.Obra)
-                .WithMany(o => o.Reservas)
-                .HasForeignKey(r => r.IdPlay);
+                .HasKey(r => new { r.IdReservation, r.IdPlay });
 
             modelBuilder.Entity<Sesion>()
                 .HasOne<Obra>(s => s.Obra)
                 .WithMany(o => o.Sesiones)
                 .HasForeignKey(s => s.IdPlay);
 
+            modelBuilder.Entity<Sesion>()
+                .HasKey(r => new { r.IdSesion, r.IdSeats });
+
+            modelBuilder.Entity<Obra>()
+                .HasMany(o => o.Reservas)
+                .WithOne(f => f.Obra)
+                .HasForeignKey(f => f.IdPlay);
+
+            modelBuilder.Entity<Obra>()
+                .HasMany(o => o.Sesiones)
+                .WithOne(f => f.Obra)
+                .HasForeignKey(f => f.IdSesion);
+
+            modelBuilder.Entity<Asientos>()
+                .HasKey(r => new { r.IdSeats, r.IdUser });
+
             modelBuilder.Entity<Obra>().HasData(
-                new Obra { IdPlay = 1, Name = "Lalaland", Description = "Una descripción", Photo = "https://picsum.photos/200/300", Price = 100 },
-                new Obra { IdPlay = 2, Name = "Los 100", Description = "Otra descripción", Photo = "https://picsum.photos/200/300", Price = 300 },
-                new Obra { IdPlay = 3, Name = "Fiesta", Description = "Otra más", Photo = "https://picsum.photos/200/300", Price = 200 }
+                new Obra { IdPlay = 1, Name = "Lalaland", Description = "Una descripción", Photo = "https://picsum.photos/200/300", Price = 100, Duration = "2h", Date = new DateTime(2024, 3, 20) },
+                new Obra { IdPlay = 2, Name = "Los 100", Description = "Otra descripción", Photo = "https://picsum.photos/200/300", Price = 300, Duration = "2h", Date = new DateTime(2024, 3, 20) },
+                new Obra { IdPlay = 3, Name = "Fiesta", Description = "Otra más", Photo = "https://picsum.photos/200/300", Price = 200, Duration = "2h", Date = new DateTime(2024, 3, 20) }
             );
 
             modelBuilder.Entity<Reserva>().HasData(
                 new Reserva { IdReservation = 1, User_Email = "user1@example.com", ReservationPrice = "100", ReservationDate = new DateTime(2024, 3, 20), IdUser = 1, IdPlay = 1 },
-                new Reserva { IdReservation = 2, User_Email = "user2@example.com", ReservationPrice = "200", ReservationDate = new DateTime(2024, 3, 21), IdUser = 2, IdPlay = 2 },
-                new Reserva { IdReservation = 3, User_Email = "user3@example.com", ReservationPrice = "300", ReservationDate = new DateTime(2024, 3, 22), IdUser = 3, IdPlay = 3 }
+                new Reserva { IdReservation = 2, User_Email = "user2@example.com", ReservationPrice = "200", ReservationDate = new DateTime(2024, 3, 21), IdUser = 2, IdPlay = 1 },
+                new Reserva { IdReservation = 3, User_Email = "user3@example.com", ReservationPrice = "300", ReservationDate = new DateTime(2024, 3, 22), IdUser = 3, IdPlay = 1 }
             );
 
 
@@ -49,9 +63,9 @@ namespace TeatroApi.Data
             );
 
             modelBuilder.Entity<Sesion>().HasData(
-                new Sesion { IdSesion = 1, IdPlay = 1, SesionTime = new DateTime(2024, 3, 20, 10, 0, 0) },
-                new Sesion { IdSesion = 2, IdPlay = 2, SesionTime = new DateTime(2024, 3, 21, 10, 30, 0) },
-                new Sesion { IdSesion = 3, IdPlay = 3, SesionTime = new DateTime(2024, 3, 22, 20, 30, 0) }
+                new Sesion { IdSesion = 1, IdPlay = 1, SesionTime = "16:00-17:00" , IdSeats = 1},
+                new Sesion { IdSesion = 2, IdPlay = 2, SesionTime = "19:00-20:00" , IdSeats = 2},
+                new Sesion { IdSesion = 3, IdPlay = 3, SesionTime = "22:00-23:00" , IdSeats = 3}
             );
 
             modelBuilder.Entity<Usuario>().HasData(

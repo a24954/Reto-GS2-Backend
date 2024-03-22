@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using TeatroApi.Data;
 using TeatroApi.Models;
 using TeatroApi.Business;
+using TeatroAPI.DTOs;
 
 namespace TeatroApi.API.Controllers
 {
@@ -22,7 +23,7 @@ namespace TeatroApi.API.Controllers
             _obraService.GetAll();
 
         [HttpGet("{id}")]
-        public ActionResult<Obra> Get(int id)
+        public ActionResult<ObraSimpleDto> Get(int id)
         {
             var obra = _obraService.Get(id);
 
