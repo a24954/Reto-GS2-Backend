@@ -15,7 +15,6 @@ public class Obra
     public string  ? Photo { get; set; }
     [Required]
     public string  ? Duration { get; set; }
-    [Required]
     public decimal Price { get; set; }
     [Required]
     public DateTime  ? Date { get; set; }

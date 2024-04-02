@@ -1,5 +1,6 @@
 using TeatroApi.Models;
 using Microsoft.EntityFrameworkCore;
+using TeatroAPI.DTOs;
 
 namespace TeatroApi.Data
 {
@@ -18,9 +19,27 @@ namespace TeatroApi.Data
             SaveChanges();
         }
 
-        public Sesion? Get(int sesionId)
+        public SesionSimpleDto? Get(int sesionId)
         {
-            return _context.Sesiones.FirstOrDefault(sesion => sesion.IdSesion == sesionId);
+
+            var asientos = _context.Asientos
+            .Where(asientos => asientos.IdSeats == sesionId)
+            .Select(r => new AsientosSimpleDto
+            {
+                IdSeats = r.IdSeats,
+                Number = r.Number,
+                Status = r.Status
+            }).FirstOrDefault();
+
+            var sesion = _context.Sesiones
+            .Where(sesiones => sesiones.IdSesion == sesionId)
+            .Select(u => new SesionSimpleDto
+            {
+                IdSesion = u.IdSesion,
+                SesionTime = u.SesionTime,
+                Asientos = asientos
+            }).FirstOrDefault();
+            return sesion;
         }
 
         public void Update(Sesion sesion)
@@ -28,16 +47,18 @@ namespace TeatroApi.Data
             _context.Entry(sesion).State = EntityState.Modified;
         }
 
-        public void Delete(int sesionId) {
-            var sesion = Get(sesionId);
-            if (sesion is null) {
+        public void Delete(int sesionId)
+        {
+            var sesion = _context.Sesiones.Find(sesionId);
+            if (sesion is null)
+            {
                 throw new KeyNotFoundException("Account not found.");
             }
             _context.Sesiones.Remove(sesion);
             SaveChanges();
 
         }
-        
+
 
         public void SaveChanges()
         {
@@ -49,5 +70,5 @@ namespace TeatroApi.Data
             return _context.Sesiones.ToList();
 
         }
-    }   
+    }
 }

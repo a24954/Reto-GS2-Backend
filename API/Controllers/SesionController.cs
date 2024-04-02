@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using TeatroApi.Data;
 using TeatroApi.Models;
 using TeatroApi.Business;
+using TeatroAPI.DTOs;
 
 namespace TeatroApi.API.Controllers
 {
@@ -22,7 +23,7 @@ namespace TeatroApi.API.Controllers
             _sesionService.GetAll();
 
         [HttpGet("{id}")]
-        public ActionResult<Sesion> Get(int id)
+        public ActionResult<SesionSimpleDto> Get(int id)
         {
             var sesion = _sesionService.Get(id);
 
@@ -33,8 +34,9 @@ namespace TeatroApi.API.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Sesion sesion)
+        public IActionResult Create(Sesion sesiondto)
         {
+            var sesion = new Sesion { Seats = sesiondto.Seats, SesionTime = sesiondto.SesionTime, IdPlay = sesiondto.IdPlay };
             _sesionService.Add(sesion);
             return CreatedAtAction(nameof(Get), new { id = sesion.IdSesion }, sesion);
         }
