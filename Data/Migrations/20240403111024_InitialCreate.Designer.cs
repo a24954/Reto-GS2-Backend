@@ -12,7 +12,7 @@ using TeatroApi.Data;
 namespace TeatroApi.Data.Migrations
 {
     [DbContext(typeof(TeatroContext))]
-    [Migration("20240322191955_InitialCreate")]
+    [Migration("20240403111024_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
