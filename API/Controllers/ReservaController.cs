@@ -34,10 +34,11 @@ namespace TeatroApi.API.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Reserva reserva)
+        public IActionResult Create(Reserva reservadto)
         {
+            var reserva = new Reserva { IdReservation = reservadto.IdReservation, User_Email = reservadto.User_Email, ReservationPrice = reservadto.ReservationPrice, ReservationDate = reservadto.ReservationDate, IdPlay = reservadto.IdPlay};
             _reservaService.Add(reserva);
-            return CreatedAtAction(nameof(Get), new { id = reserva.IdReservation }, reserva);
+            return CreatedAtAction(nameof(Get), new { id = reserva. IdReservation }, reserva);
         }
 
         [HttpPut("{id}")]
