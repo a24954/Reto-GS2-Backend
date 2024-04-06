@@ -25,19 +25,36 @@ namespace TeatroApi.Data
 
         public void Update(Asientos asientos)
         {
-            _context.Entry(asientos).State = EntityState.Modified;
+            var existingAsientos = _context.Asientos.Find(asientos.IdSeats, asientos.IdUser);
+            if (existingAsientos != null)
+            {
+                existingAsientos.Number = asientos.Number;
+                existingAsientos.Status = asientos.Status;
+
+                _context.Entry(existingAsientos).State = EntityState.Modified;
+
+                SaveChanges();
+            }
+            else
+            {
+                throw new KeyNotFoundException("Asientos not found.");
+            }
         }
 
-        public void Delete(int asientosId) {
+
+
+        public void Delete(int asientosId)
+        {
             var asientos = Get(asientosId);
-            if (asientos is null) {
+            if (asientos is null)
+            {
                 throw new KeyNotFoundException("Account not found.");
             }
             _context.Asientos.Remove(asientos);
             SaveChanges();
 
         }
-        
+
 
         public void SaveChanges()
         {
@@ -49,5 +66,5 @@ namespace TeatroApi.Data
             return _context.Asientos.ToList();
 
         }
-    }   
+    }
 }

@@ -39,7 +39,6 @@ namespace TeatroApi.Data
                 Photo = r.Photo,
                 Price = r.Price,
                 Duration = r.Duration,
-                Sesion = sesiones
             }).FirstOrDefault();
 
             return obra;

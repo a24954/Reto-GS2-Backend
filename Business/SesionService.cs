@@ -20,6 +20,6 @@ namespace TeatroApi.Business
 
         public void Delete(int id) => _sesionRepository.Delete(id);
 
-        public void Update(Sesion sesion) => _sesionRepository.Update(sesion);
+        public void Update(SesionSimpleDto sesion) => _sesionRepository.Update(sesion);
     }
 }

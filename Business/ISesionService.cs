@@ -8,6 +8,6 @@ namespace TeatroApi.Business
         SesionSimpleDto? Get(int id);
         void Add(Sesion sesion);
         void Delete(int id);
-        void Update(Sesion sesion);
+        void Update(SesionSimpleDto sesion);
     }
 }

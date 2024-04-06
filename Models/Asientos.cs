@@ -12,5 +12,7 @@ public class Asientos
     [Required]
     public bool Status { get; set; }
     public int IdUser { get; set; }
+    public int IdSesion { get; set; }
+
 }
 

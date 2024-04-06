@@ -97,18 +97,13 @@ namespace TeatroApi.Data.Migrations
                     IdUser = table.Column<int>(type: "int", nullable: false),
                     Number = table.Column<int>(type: "int", nullable: false),
                     Status = table.Column<bool>(type: "bit", nullable: false),
-                    ObraIdPlay = table.Column<int>(type: "int", nullable: true),
+                    IdSesion = table.Column<int>(type: "int", nullable: false),
                     SesionIdSeats = table.Column<int>(type: "int", nullable: true),
                     SesionIdSesion = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Asientos", x => new { x.IdSeats, x.IdUser });
-                    table.ForeignKey(
-                        name: "FK_Asientos_Obras_ObraIdPlay",
-                        column: x => x.ObraIdPlay,
-                        principalTable: "Obras",
-                        principalColumn: "IdPlay");
                     table.ForeignKey(
                         name: "FK_Asientos_Sesiones_SesionIdSesion_SesionIdSeats",
                         columns: x => new { x.SesionIdSesion, x.SesionIdSeats },
@@ -118,12 +113,12 @@ namespace TeatroApi.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "Asientos",
-                columns: new[] { "IdSeats", "IdUser", "Number", "ObraIdPlay", "SesionIdSeats", "SesionIdSesion", "Status" },
+                columns: new[] { "IdSeats", "IdUser", "IdSesion", "Number", "SesionIdSeats", "SesionIdSesion", "Status" },
                 values: new object[,]
                 {
-                    { 1, 0, 1, null, null, null, true },
-                    { 2, 0, 2, null, null, null, false },
-                    { 3, 0, 3, null, null, null, true }
+                    { 1, 0, 0, 1, null, null, true },
+                    { 2, 0, 0, 2, null, null, false },
+                    { 3, 0, 0, 3, null, null, true }
                 });
 
             migrationBuilder.InsertData(
@@ -165,11 +160,6 @@ namespace TeatroApi.Data.Migrations
                     { 2, 2, 2, "19:00-20:00" },
                     { 3, 3, 3, "22:00-23:00" }
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Asientos_ObraIdPlay",
-                table: "Asientos",
-                column: "ObraIdPlay");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Asientos_SesionIdSesion_SesionIdSeats",

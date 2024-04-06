@@ -30,10 +30,10 @@ namespace TeatroApi.Data.Migrations
                     b.Property<int>("IdUser")
                         .HasColumnType("int");
 
-                    b.Property<int>("Number")
+                    b.Property<int>("IdSesion")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ObraIdPlay")
+                    b.Property<int>("Number")
                         .HasColumnType("int");
 
                     b.Property<int?>("SesionIdSeats")
@@ -47,8 +47,6 @@ namespace TeatroApi.Data.Migrations
 
                     b.HasKey("IdSeats", "IdUser");
 
-                    b.HasIndex("ObraIdPlay");
-
                     b.HasIndex("SesionIdSesion", "SesionIdSeats");
 
                     b.ToTable("Asientos");
@@ -58,6 +56,7 @@ namespace TeatroApi.Data.Migrations
                         {
                             IdSeats = 1,
                             IdUser = 0,
+                            IdSesion = 0,
                             Number = 1,
                             Status = true
                         },
@@ -65,6 +64,7 @@ namespace TeatroApi.Data.Migrations
                         {
                             IdSeats = 2,
                             IdUser = 0,
+                            IdSesion = 0,
                             Number = 2,
                             Status = false
                         },
@@ -72,6 +72,7 @@ namespace TeatroApi.Data.Migrations
                         {
                             IdSeats = 3,
                             IdUser = 0,
+                            IdSesion = 0,
                             Number = 3,
                             Status = true
                         });
@@ -302,19 +303,15 @@ namespace TeatroApi.Data.Migrations
 
             modelBuilder.Entity("TeatroApi.Models.Asientos", b =>
                 {
-                    b.HasOne("TeatroApi.Models.Obra", null)
-                        .WithMany("Asientos")
-                        .HasForeignKey("ObraIdPlay");
-
                     b.HasOne("TeatroApi.Models.Sesion", null)
-                        .WithMany("Seats")
+                        .WithMany("Asientos")
                         .HasForeignKey("SesionIdSesion", "SesionIdSeats");
                 });
 
             modelBuilder.Entity("TeatroApi.Models.Reserva", b =>
                 {
                     b.HasOne("TeatroApi.Models.Obra", "Obra")
-                        .WithMany("Reservas")
+                        .WithMany()
                         .HasForeignKey("IdPlay")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -335,16 +332,12 @@ namespace TeatroApi.Data.Migrations
 
             modelBuilder.Entity("TeatroApi.Models.Obra", b =>
                 {
-                    b.Navigation("Asientos");
-
-                    b.Navigation("Reservas");
-
                     b.Navigation("Sesiones");
                 });
 
             modelBuilder.Entity("TeatroApi.Models.Sesion", b =>
                 {
-                    b.Navigation("Seats");
+                    b.Navigation("Asientos");
                 });
 #pragma warning restore 612, 618
         }

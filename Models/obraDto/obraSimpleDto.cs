@@ -9,10 +9,6 @@ namespace TeatroApi.Models
         public string? Description { get; set; }
 
         public string? Duration { get; set; }
-        public DateTime? Date { get; set; }
-
-
-        public SesionSimpleDto Sesion { get; set; }
 
     }
 }

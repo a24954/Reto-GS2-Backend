@@ -39,7 +39,7 @@ namespace TeatroApi.Data
             return sesion;
         }
 
-        public void Update(Sesion sesion)
+        public void Update(SesionSimpleDto sesion)
         {
             _context.Entry(sesion).State = EntityState.Modified;
         }

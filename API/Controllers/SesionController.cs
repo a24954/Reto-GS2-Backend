@@ -50,7 +50,7 @@ namespace TeatroApi.API.Controllers
             if (existingSesion == null)
                 return NotFound();
 
-            var sesionToUpdate = new Sesion
+            var sesionToUpdate = new SesionSimpleDto
             {
                 IdSesion = sesionDto.IdSesion,
                 SesionTime = sesionDto.SesionTime,
