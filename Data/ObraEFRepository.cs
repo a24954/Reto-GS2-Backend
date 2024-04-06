@@ -1,6 +1,5 @@
 using TeatroApi.Models;
 using Microsoft.EntityFrameworkCore;
-using TeatroAPI.DTOs;
 
 namespace TeatroApi.Data
 {

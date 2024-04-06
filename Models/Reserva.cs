@@ -15,7 +15,6 @@ public class Reserva
     public DateTime ReservationDate { get; set; }
 
     public int IdUser { get; set; }
-    public virtual Usuario Usuario { get; set; }
 
     public int IdPlay { get; set; }
     public virtual Obra Obra { get; set; }

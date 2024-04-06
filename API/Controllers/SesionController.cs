@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using TeatroApi.Data;
 using TeatroApi.Models;
 using TeatroApi.Business;
-using TeatroAPI.DTOs;
 
 namespace TeatroApi.API.Controllers
 {
@@ -19,7 +18,7 @@ namespace TeatroApi.API.Controllers
         }
 
         [HttpGet]
-        public ActionResult<List<Sesion>> GetAll() =>
+        public ActionResult<List<SesionSimpleDto>> GetAll() =>
             _sesionService.GetAll();
 
         [HttpGet("{id}")]
@@ -34,27 +33,36 @@ namespace TeatroApi.API.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Sesion sesiondto)
+        public IActionResult Create(SesionSimpleDto sesiondto)
         {
-            var sesion = new Sesion { Seats = sesiondto.Seats, SesionTime = sesiondto.SesionTime, IdPlay = sesiondto.IdPlay };
+            var sesion = new Sesion { SesionTime = sesiondto.SesionTime, IdPlay = sesiondto.IdPlay };
             _sesionService.Add(sesion);
             return CreatedAtAction(nameof(Get), new { id = sesion.IdSesion }, sesion);
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(int id, Sesion sesion)
+        public IActionResult Update(int id, SesionSimpleDto sesionDto)
         {
-            if (id != sesion.IdSesion)
+            if (id != sesionDto.IdSesion)
                 return BadRequest();
 
             var existingSesion = _sesionService.Get(id);
-            if (existingSesion is null)
+            if (existingSesion == null)
                 return NotFound();
 
-            _sesionService.Update(sesion);
+            var sesionToUpdate = new Sesion
+            {
+                IdSesion = sesionDto.IdSesion,
+                SesionTime = sesionDto.SesionTime,
+                IdPlay = sesionDto.IdPlay
+            };
+
+            _sesionService.Update(sesionToUpdate);
 
             return NoContent();
         }
+
+
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)

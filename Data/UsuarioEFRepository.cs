@@ -18,10 +18,18 @@ namespace TeatroApi.Data
             SaveChanges();
         }
 
-        public Usuario? Get(int usuarioId)
+        public UsuarioSimpleDto? Get(int usuarioId)
         {
-            return _context.Usuarios.FirstOrDefault(usuario => usuario.IdUser == usuarioId);
+            var usuario = _context.Usuarios
+            .Where(usuario => usuario.IdUser == usuarioId)
+            .Select(r => new UsuarioSimpleDto
+            {
+                UserName = r.UserName,
+                Password = r.Password,
+            }).FirstOrDefault();
+            return usuario;
         }
+        
 
         public void Update(Usuario usuario)
         {
@@ -29,7 +37,7 @@ namespace TeatroApi.Data
         }
 
         public void Delete(int usuarioId) {
-            var usuario = Get(usuarioId);
+            var usuario = _context.Usuarios.Find(usuarioId);
             if (usuario is null) {
                 throw new KeyNotFoundException("Account not found.");
             }

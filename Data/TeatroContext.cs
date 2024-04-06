@@ -15,11 +15,6 @@ namespace TeatroApi.Data
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Reserva>()
-                .HasOne<Usuario>(r => r.Usuario)
-                .WithMany(u => u.Reservas)
-                .HasForeignKey(r => r.IdUser);
-
-            modelBuilder.Entity<Reserva>()
                 .HasKey(r => new { r.IdReservation, r.IdPlay });
 
             modelBuilder.Entity<Sesion>()
@@ -29,11 +24,6 @@ namespace TeatroApi.Data
 
             modelBuilder.Entity<Sesion>()
                 .HasKey(r => new { r.IdSesion, r.IdSeats });
-
-            modelBuilder.Entity<Obra>()
-                .HasMany(o => o.Reservas)
-                .WithOne(f => f.Obra)
-                .HasForeignKey(f => f.IdPlay);
 
             modelBuilder.Entity<Obra>()
                 .HasMany(o => o.Sesiones)

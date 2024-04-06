@@ -22,7 +22,7 @@ namespace TeatroApi.API.Controllers
             _usuarioService.GetAll();
 
         [HttpGet("{id}")]
-        public ActionResult<Usuario> Get(int id)
+        public ActionResult<UsuarioSimpleDto> Get(int id)
         {
             var usuario = _usuarioService.Get(id);
 
@@ -38,7 +38,6 @@ namespace TeatroApi.API.Controllers
             _usuarioService.Add(usuario);
             return CreatedAtAction(nameof(Get), new { id = usuario.IdUser }, usuario);
         }
-
         [HttpPut("{id}")]
         public IActionResult Update(int id, Usuario usuario)
         {

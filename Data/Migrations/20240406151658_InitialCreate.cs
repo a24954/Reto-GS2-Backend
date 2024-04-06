@@ -48,26 +48,6 @@ namespace TeatroApi.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Sesiones",
-                columns: table => new
-                {
-                    IdSesion = table.Column<int>(type: "int", nullable: false),
-                    IdSeats = table.Column<int>(type: "int", nullable: false),
-                    SesionTime = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IdPlay = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Sesiones", x => new { x.IdSesion, x.IdSeats });
-                    table.ForeignKey(
-                        name: "FK_Sesiones_Obras_IdSesion",
-                        column: x => x.IdSesion,
-                        principalTable: "Obras",
-                        principalColumn: "IdPlay",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Reservas",
                 columns: table => new
                 {
@@ -87,11 +67,25 @@ namespace TeatroApi.Data.Migrations
                         principalTable: "Obras",
                         principalColumn: "IdPlay",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Sesiones",
+                columns: table => new
+                {
+                    IdSesion = table.Column<int>(type: "int", nullable: false),
+                    IdSeats = table.Column<int>(type: "int", nullable: false),
+                    SesionTime = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IdPlay = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Sesiones", x => new { x.IdSesion, x.IdSeats });
                     table.ForeignKey(
-                        name: "FK_Reservas_Usuarios_IdUser",
-                        column: x => x.IdUser,
-                        principalTable: "Usuarios",
-                        principalColumn: "IdUser",
+                        name: "FK_Sesiones_Obras_IdSesion",
+                        column: x => x.IdSesion,
+                        principalTable: "Obras",
+                        principalColumn: "IdPlay",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -186,11 +180,6 @@ namespace TeatroApi.Data.Migrations
                 name: "IX_Reservas_IdPlay",
                 table: "Reservas",
                 column: "IdPlay");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Reservas_IdUser",
-                table: "Reservas",
-                column: "IdUser");
         }
 
         /// <inheritdoc />
@@ -203,10 +192,10 @@ namespace TeatroApi.Data.Migrations
                 name: "Reservas");
 
             migrationBuilder.DropTable(
-                name: "Sesiones");
+                name: "Usuarios");
 
             migrationBuilder.DropTable(
-                name: "Usuarios");
+                name: "Sesiones");
 
             migrationBuilder.DropTable(
                 name: "Obras");

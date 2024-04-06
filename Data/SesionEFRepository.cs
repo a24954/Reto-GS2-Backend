@@ -1,7 +1,5 @@
 using TeatroApi.Models;
 using Microsoft.EntityFrameworkCore;
-using TeatroAPI.DTOs;
-
 namespace TeatroApi.Data
 {
     public class SesionEFRepository : ISesionRepository
@@ -37,7 +35,6 @@ namespace TeatroApi.Data
             {
                 IdSesion = u.IdSesion,
                 SesionTime = u.SesionTime,
-                Asientos = asientos
             }).FirstOrDefault();
             return sesion;
         }
@@ -65,10 +62,35 @@ namespace TeatroApi.Data
             _context.SaveChanges();
         }
 
-        public List<Sesion> GetAll()
+        public List<SesionSimpleDto> GetAll()
         {
-            return _context.Sesiones.ToList();
+            var sesiones = _context.Sesiones
+                .Include(s => s.Obra)
+                .Include(s => s.Asientos)
+                .ToList();
 
+            var sesionesdto = sesiones
+                .Select(s => new SesionSimpleDto
+                {
+                    IdSesion = s.IdSesion,
+                    SesionTime = s.SesionTime,
+                    Obra = new ObraSimpleDto
+                    {
+                        Name = s.Obra.Name,
+                        Description = s.Obra.Description,
+                        Photo = s.Obra.Photo,
+                        Price = s.Obra.Price,
+                        Duration = s.Obra.Duration
+                    },
+                    Asientos = s.Asientos.Select(a => new AsientosSimpleDto
+                    {
+                        IdSeats = a.IdSeats,
+                        Number = a.Number,
+                        Status = a.Status
+                    }).ToList()
+                }).ToList();
+            return sesionesdto;
         }
+
     }
 }

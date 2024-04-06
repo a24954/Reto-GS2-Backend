@@ -14,12 +14,19 @@ namespace TeatroApi.Business
         }
         public List<Usuario> GetAll() => _usuarioRepository.GetAll();
 
-        public Usuario? Get(int id) => _usuarioRepository.Get(id);
+        public UsuarioSimpleDto? Get(int id) => _usuarioRepository.Get(id);
 
         public void Add(Usuario usuario) => _usuarioRepository.Add(usuario);
 
         public void Delete(int id) => _usuarioRepository.Delete(id);
 
         public void Update(Usuario usuario) => _usuarioRepository.Update(usuario);
+    
+        public Usuario Login(string userName, string password)
+        {
+            var usuario = _usuarioRepository.GetAll().FirstOrDefault(u => u.UserName == userName && u.Password == password);
+
+            return usuario; 
+        }
     }
 }

@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using TeatroApi.Data;
 using TeatroApi.Models;
 using TeatroApi.Business;
-using TeatroAPI.DTOs;
 
 namespace TeatroApi.API.Controllers
 {

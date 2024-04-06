@@ -1,6 +1,5 @@
 ﻿using TeatroApi.Data;
 using TeatroApi.Models;
-using TeatroAPI.DTOs;
 
 namespace TeatroApi.Business
 {

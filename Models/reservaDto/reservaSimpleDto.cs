@@ -1,6 +1,6 @@
 using TeatroApi.Models;
 
-namespace TeatroAPI.DTOs
+namespace TeatroApi.Models
 {
     public class ReservaSimpleDto
     {

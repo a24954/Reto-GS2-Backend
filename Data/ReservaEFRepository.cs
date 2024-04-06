@@ -1,7 +1,5 @@
 using TeatroApi.Models;
 using Microsoft.EntityFrameworkCore;
-using TeatroAPI.DTOs;
-
 namespace TeatroApi.Data
 {
     public class ReservaEFRepository : IReservaRepository
@@ -34,7 +32,7 @@ namespace TeatroApi.Data
             .Where(usuarios => usuarios.IdUser == reservaId)
             .Select(u => new UsuarioSimpleDto
             {
-                UserName = u.IdUser.ToString()
+                UserName = u.UserName.ToString()
             }).FirstOrDefault();
 
             var asientos = _context.Asientos
@@ -50,7 +48,6 @@ namespace TeatroApi.Data
             .Where(obra => obra.IdPlay == reservaId)
             .Select(o => new ObraSimpleDto
             {
-                IdPlay = o.IdPlay,
                 Name = o.Name,
                 Photo = o.Photo,
                 Price = o.Price,

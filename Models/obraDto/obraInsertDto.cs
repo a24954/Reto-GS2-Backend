@@ -1,4 +1,4 @@
-namespace TeatroAPI.DTOs
+namespace TeatroApi.Models
 {
     public class ObraInsertDto
     {

@@ -1,4 +1,4 @@
-namespace TeatroAPI.DTOs
+namespace TeatroApi.Models
 {
     public class SesionSimpleDto
     {
@@ -7,7 +7,8 @@ namespace TeatroAPI.DTOs
 
         public int IdPlay { get; set; }
 
-        public AsientosSimpleDto Asientos { get; set; }
+        public List<AsientosSimpleDto> Asientos { get; set; }
+        public ObraSimpleDto Obra { get; set; }
 
     }
 

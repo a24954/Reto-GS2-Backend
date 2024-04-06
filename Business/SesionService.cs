@@ -1,6 +1,5 @@
 using TeatroApi.Data;
 using TeatroApi.Models;
-using TeatroAPI.DTOs;
 
 namespace TeatroApi.Business
 {
@@ -13,7 +12,7 @@ namespace TeatroApi.Business
             _sesionRepository = sesionRepository;
             
         }
-        public List<Sesion> GetAll() => _sesionRepository.GetAll();
+        public List<SesionSimpleDto> GetAll() => _sesionRepository.GetAll();
 
         public SesionSimpleDto? Get(int id) => _sesionRepository.Get(id);
 

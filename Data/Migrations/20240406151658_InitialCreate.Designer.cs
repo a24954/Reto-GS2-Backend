@@ -12,7 +12,7 @@ using TeatroApi.Data;
 namespace TeatroApi.Data.Migrations
 {
     [DbContext(typeof(TeatroContext))]
-    [Migration("20240405155534_InitialCreate")]
+    [Migration("20240406151658_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -174,8 +174,6 @@ namespace TeatroApi.Data.Migrations
 
                     b.HasIndex("IdPlay");
 
-                    b.HasIndex("IdUser");
-
                     b.ToTable("Reservas");
 
                     b.HasData(
@@ -324,15 +322,7 @@ namespace TeatroApi.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("TeatroApi.Models.Usuario", "Usuario")
-                        .WithMany("Reservas")
-                        .HasForeignKey("IdUser")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Obra");
-
-                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("TeatroApi.Models.Sesion", b =>
@@ -358,11 +348,6 @@ namespace TeatroApi.Data.Migrations
             modelBuilder.Entity("TeatroApi.Models.Sesion", b =>
                 {
                     b.Navigation("Seats");
-                });
-
-            modelBuilder.Entity("TeatroApi.Models.Usuario", b =>
-                {
-                    b.Navigation("Reservas");
                 });
 #pragma warning restore 612, 618
         }
