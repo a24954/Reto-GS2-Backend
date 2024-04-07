@@ -6,14 +6,19 @@ namespace TeatroApi.Models;
 public class Obra
 {
     [Key]
-    public int Id { get; set; }
+    public int IdPlay { get; set; }
     [Required]
-    public string? Name { get; set; }
+    public string ? Name  { get; set; }
     [Required]
-    public string? Description { get; set; }
+    public string ? Description { get; set; }
     [Required]
-    public string? Photo { get; set; }
+    public string  ? Photo { get; set; }
     [Required]
-    public string? Price { get; set; }
-    
+    public string  ? Duration { get; set; }
+    public decimal Price { get; set; }
+    [Required]
+    public DateTime  ? Date { get; set; }
+    [Required]
+    public virtual ICollection<Sesion> Sesiones { get; set; } = new List<Sesion>(); 
+
 }

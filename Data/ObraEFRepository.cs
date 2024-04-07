@@ -5,38 +5,63 @@ namespace TeatroApi.Data
 {
     public class ObraEFRepository : IObraRepository
     {
-        private readonly ObraContext _context;
+        private readonly TeatroContext _context;
 
-        public ObraEFRepository(ObraContext context)
+        public ObraEFRepository(TeatroContext context)
         {
             _context = context;
         }
 
         public void Add(Obra obra)
         {
-            _context.Obra.Add(obra);
+            _context.Obras.Add(obra);
+            SaveChanges();
         }
 
-        public Obra Get(int obraId)
+        public ObraSimpleDto? Get(int obraId)
         {
-            return _context.Obra.FirstOrDefault(obra => obra.Id == obraId);
+
+            var sesiones = _context.Sesiones
+            .Where(sesiones => sesiones.IdSesion == obraId)
+            .Select(u => new SesionSimpleDto
+            {
+                IdSesion = u.IdSesion,
+                SesionTime = u.SesionTime
+
+            }).FirstOrDefault();
+
+            var obra = _context.Obras
+            .Where(obra => obra.IdPlay == obraId)
+            .Select(r => new ObraSimpleDto
+            {
+                IdPlay = r.IdPlay,
+                Name = r.Name,
+                Photo = r.Photo,
+                Price = r.Price,
+                Duration = r.Duration,
+            }).FirstOrDefault();
+
+            return obra;
         }
+
 
         public void Update(Obra obra)
         {
             _context.Entry(obra).State = EntityState.Modified;
         }
 
-        public void Delete(int obraId) {
-            var obra = Get(obraId);
-            if (obra is null) {
+        public void Delete(int obraId)
+        {
+            var obra = _context.Obras.Find(obraId);
+            if (obra is null)
+            {
                 throw new KeyNotFoundException("Account not found.");
             }
-            _context.Obra.Remove(obra);
+            _context.Obras.Remove(obra);
             SaveChanges();
 
         }
-        
+
 
         public void SaveChanges()
         {
@@ -45,8 +70,8 @@ namespace TeatroApi.Data
 
         public List<Obra> GetAll()
         {
-            return _context.Obra.ToList();
+            return _context.Obras.ToList();
 
         }
-    }   
+    }
 }

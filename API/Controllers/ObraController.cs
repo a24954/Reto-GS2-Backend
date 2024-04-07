@@ -22,7 +22,7 @@ namespace TeatroApi.API.Controllers
             _obraService.GetAll();
 
         [HttpGet("{id}")]
-        public ActionResult<Obra> Get(int id)
+        public ActionResult<ObraSimpleDto> Get(int id)
         {
             var obra = _obraService.Get(id);
 
@@ -33,16 +33,17 @@ namespace TeatroApi.API.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Obra obra)
+        public IActionResult Create(ObraInsertDto obradto)
         {
+            var obra = new Obra {Name = obradto.Name, Photo = obradto.Photo, Price = obradto.Price, Duration = obradto.Duration, Date = obradto.Date, Description = obradto.Description};
             _obraService.Add(obra);
-            return CreatedAtAction(nameof(Get), new { id = obra.Id }, obra);
+            return CreatedAtAction(nameof(Get), new { id = obra.IdPlay }, obra);
         }
 
         [HttpPut("{id}")]
         public IActionResult Update(int id, Obra obra)
         {
-            if (id != obra.Id)
+            if (id != obra.IdPlay)
                 return BadRequest();
 
             var existingObra = _obraService.Get(id);
