@@ -40,9 +40,9 @@ namespace TeatroApi.Data
             );
 
             modelBuilder.Entity<Reserva>().HasData(
-                new Reserva { IdReservation = 1, User_Email = "user1@example.com", ReservationPrice = "100", ReservationDate = new DateTime(2024, 3, 20), IdUser = 1, IdPlay = 1 },
-                new Reserva { IdReservation = 2, User_Email = "user2@example.com", ReservationPrice = "200", ReservationDate = new DateTime(2024, 3, 21), IdUser = 2, IdPlay = 1 },
-                new Reserva { IdReservation = 3, User_Email = "user3@example.com", ReservationPrice = "300", ReservationDate = new DateTime(2024, 3, 22), IdUser = 3, IdPlay = 1 }
+                new Reserva { IdReservation = 1, User_Email = "user1@example.com", ReservationPrice = "100", ReservationDate = new DateTime(2024, 3, 20), IdUser = 1, IdPlay = 1, IdSeats = 1 },
+                new Reserva { IdReservation = 2, User_Email = "user2@example.com", ReservationPrice = "200", ReservationDate = new DateTime(2024, 3, 21), IdUser = 2, IdPlay = 1, IdSeats = 2 },
+                new Reserva { IdReservation = 3, User_Email = "user3@example.com", ReservationPrice = "300", ReservationDate = new DateTime(2024, 3, 22), IdUser = 3, IdPlay = 1, IdSeats = 3 }
             );
 
 

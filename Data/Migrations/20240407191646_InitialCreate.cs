@@ -56,7 +56,8 @@ namespace TeatroApi.Data.Migrations
                     UserEmail = table.Column<string>(name: "User_Email", type: "nvarchar(max)", nullable: false),
                     ReservationPrice = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ReservationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdUser = table.Column<int>(type: "int", nullable: false)
+                    IdUser = table.Column<int>(type: "int", nullable: false),
+                    IdSeats = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -143,12 +144,12 @@ namespace TeatroApi.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "Reservas",
-                columns: new[] { "IdPlay", "IdReservation", "IdUser", "ReservationDate", "ReservationPrice", "User_Email" },
+                columns: new[] { "IdPlay", "IdReservation", "IdSeats", "IdUser", "ReservationDate", "ReservationPrice", "User_Email" },
                 values: new object[,]
                 {
-                    { 1, 1, 1, new DateTime(2024, 3, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "100", "user1@example.com" },
-                    { 1, 2, 2, new DateTime(2024, 3, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), "200", "user2@example.com" },
-                    { 1, 3, 3, new DateTime(2024, 3, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "300", "user3@example.com" }
+                    { 1, 1, 1, 1, new DateTime(2024, 3, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "100", "user1@example.com" },
+                    { 1, 2, 2, 2, new DateTime(2024, 3, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), "200", "user2@example.com" },
+                    { 1, 3, 3, 3, new DateTime(2024, 3, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "300", "user3@example.com" }
                 });
 
             migrationBuilder.InsertData(

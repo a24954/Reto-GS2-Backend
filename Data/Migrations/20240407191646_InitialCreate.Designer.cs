@@ -12,7 +12,7 @@ using TeatroApi.Data;
 namespace TeatroApi.Data.Migrations
 {
     [DbContext(typeof(TeatroContext))]
-    [Migration("20240406171843_InitialCreate")]
+    [Migration("20240407191646_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -157,6 +157,9 @@ namespace TeatroApi.Data.Migrations
                     b.Property<int>("IdPlay")
                         .HasColumnType("int");
 
+                    b.Property<int>("IdSeats")
+                        .HasColumnType("int");
+
                     b.Property<int>("IdUser")
                         .HasColumnType("int");
 
@@ -182,6 +185,7 @@ namespace TeatroApi.Data.Migrations
                         {
                             IdReservation = 1,
                             IdPlay = 1,
+                            IdSeats = 1,
                             IdUser = 1,
                             ReservationDate = new DateTime(2024, 3, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ReservationPrice = "100",
@@ -191,6 +195,7 @@ namespace TeatroApi.Data.Migrations
                         {
                             IdReservation = 2,
                             IdPlay = 1,
+                            IdSeats = 2,
                             IdUser = 2,
                             ReservationDate = new DateTime(2024, 3, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ReservationPrice = "200",
@@ -200,6 +205,7 @@ namespace TeatroApi.Data.Migrations
                         {
                             IdReservation = 3,
                             IdPlay = 1,
+                            IdSeats = 3,
                             IdUser = 3,
                             ReservationDate = new DateTime(2024, 3, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ReservationPrice = "300",
