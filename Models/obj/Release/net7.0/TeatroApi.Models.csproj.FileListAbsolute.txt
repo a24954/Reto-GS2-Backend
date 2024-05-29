@@ -1,4 +1,0 @@
-C:\Users\Marcos casa\Desktop\Reto-GS-BACK\Reto-GS2-Backend\Models\obj\Release\net7.0\TeatroApi.Models.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Marcos casa\Desktop\Reto-GS-BACK\Reto-GS2-Backend\Models\obj\Release\net7.0\TeatroApi.Models.AssemblyInfoInputs.cache
-C:\Users\Marcos casa\Desktop\Reto-GS-BACK\Reto-GS2-Backend\Models\obj\Release\net7.0\TeatroApi.Models.AssemblyInfo.cs
-C:\Users\Marcos casa\Desktop\Reto-GS-BACK\Reto-GS2-Backend\Models\obj\Release\net7.0\TeatroApi.Models.csproj.CoreCompileInputs.cache
