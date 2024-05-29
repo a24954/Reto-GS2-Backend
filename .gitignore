@@ -2,4 +2,6 @@ bin
 obj
 bin/
 obj/
+Debug
+Debug/
 Migrations/
