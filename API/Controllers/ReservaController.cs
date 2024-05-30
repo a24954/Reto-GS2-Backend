@@ -35,7 +35,7 @@ namespace TeatroApi.API.Controllers
         [HttpPost]
         public IActionResult Create(ReservaInsertDto reservadto)
         {
-            var reserva = new Reserva { IdReservation = reservadto.IdReservation, User_Email = reservadto.User_Email, ReservationPrice = reservadto.ReservationPrice, ReservationDate = reservadto.ReservationDate, IdPlay = reservadto.IdPlay };
+            var reserva = new Reserva { User_Email = reservadto.User_Email, ReservationPrice = reservadto.ReservationPrice, ReservationDate = reservadto.ReservationDate, IdPlay = reservadto.IdPlay, ListaSeats = reservadto.ListaSeats };
             _reservaService.Add(reserva);
             return CreatedAtAction(nameof(Get), new { id = reserva.IdReservation }, reserva);
         }

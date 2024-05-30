@@ -12,5 +12,6 @@ namespace TeatroApi.Models
         public int IdUser { get; set; }
         public int IdSeats { get; set; }
         public int IdPlay { get; set; }
+        public string ListaSeats { get; set; }
     }
 }

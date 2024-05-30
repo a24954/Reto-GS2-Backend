@@ -6,6 +6,7 @@ namespace TeatroApi.Models;
 public class Sesion
 {
     [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int IdSesion { get; set; }
     [Required]
     public List<Asientos> Asientos { get; set; } = new List<Asientos>(); 

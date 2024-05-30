@@ -33,7 +33,7 @@ namespace TeatroApi.API.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(SesionSimpleDto sesiondto)
+        public IActionResult Create(SesionInsertDto sesiondto)
         {
             var sesion = new Sesion { SesionTime = sesiondto.SesionTime, IdPlay = sesiondto.IdPlay };
             _sesionService.Add(sesion);

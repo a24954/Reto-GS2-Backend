@@ -36,9 +36,6 @@ namespace TeatroApi.Data.Migrations
                     b.Property<int>("Number")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SesionIdSeats")
-                        .HasColumnType("int");
-
                     b.Property<int?>("SesionIdSesion")
                         .HasColumnType("int");
 
@@ -47,7 +44,7 @@ namespace TeatroApi.Data.Migrations
 
                     b.HasKey("IdSeats", "IdUser");
 
-                    b.HasIndex("SesionIdSesion", "SesionIdSeats");
+                    b.HasIndex("SesionIdSesion");
 
                     b.ToTable("Asientos");
 
@@ -149,7 +146,10 @@ namespace TeatroApi.Data.Migrations
             modelBuilder.Entity("TeatroApi.Models.Reserva", b =>
                 {
                     b.Property<int>("IdReservation")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdReservation"));
 
                     b.Property<int>("IdPlay")
                         .HasColumnType("int");
@@ -159,6 +159,10 @@ namespace TeatroApi.Data.Migrations
 
                     b.Property<int>("IdUser")
                         .HasColumnType("int");
+
+                    b.Property<string>("ListaSeats")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("ReservationDate")
                         .HasColumnType("datetime2");
@@ -184,6 +188,7 @@ namespace TeatroApi.Data.Migrations
                             IdPlay = 1,
                             IdSeats = 1,
                             IdUser = 1,
+                            ListaSeats = "['1']",
                             ReservationDate = new DateTime(2024, 3, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ReservationPrice = "100",
                             UserEmail = "user1@example.com"
@@ -194,6 +199,7 @@ namespace TeatroApi.Data.Migrations
                             IdPlay = 1,
                             IdSeats = 2,
                             IdUser = 2,
+                            ListaSeats = "['2']",
                             ReservationDate = new DateTime(2024, 3, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ReservationPrice = "200",
                             UserEmail = "user2@example.com"
@@ -204,6 +210,7 @@ namespace TeatroApi.Data.Migrations
                             IdPlay = 1,
                             IdSeats = 3,
                             IdUser = 3,
+                            ListaSeats = "['3']",
                             ReservationDate = new DateTime(2024, 3, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ReservationPrice = "300",
                             UserEmail = "user3@example.com"
@@ -213,19 +220,24 @@ namespace TeatroApi.Data.Migrations
             modelBuilder.Entity("TeatroApi.Models.Sesion", b =>
                 {
                     b.Property<int>("IdSesion")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdSesion"));
+
+                    b.Property<int>("IdPlay")
                         .HasColumnType("int");
 
                     b.Property<int>("IdSeats")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdPlay")
                         .HasColumnType("int");
 
                     b.Property<string>("SesionTime")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("IdSesion", "IdSeats");
+                    b.HasKey("IdSesion");
+
+                    b.HasIndex("IdPlay");
 
                     b.ToTable("Sesiones");
 
@@ -233,23 +245,30 @@ namespace TeatroApi.Data.Migrations
                         new
                         {
                             IdSesion = 1,
-                            IdSeats = 1,
                             IdPlay = 1,
+                            IdSeats = 0,
                             SesionTime = "16:00-17:00"
                         },
                         new
                         {
                             IdSesion = 2,
-                            IdSeats = 2,
                             IdPlay = 2,
+                            IdSeats = 0,
                             SesionTime = "19:00-20:00"
                         },
                         new
                         {
                             IdSesion = 3,
-                            IdSeats = 3,
                             IdPlay = 3,
+                            IdSeats = 0,
                             SesionTime = "22:00-23:00"
+                        },
+                        new
+                        {
+                            IdSesion = 4,
+                            IdPlay = 3,
+                            IdSeats = 0,
+                            SesionTime = "23:00-24:00"
                         });
                 });
 
@@ -311,7 +330,7 @@ namespace TeatroApi.Data.Migrations
                 {
                     b.HasOne("TeatroApi.Models.Sesion", null)
                         .WithMany("Asientos")
-                        .HasForeignKey("SesionIdSesion", "SesionIdSeats");
+                        .HasForeignKey("SesionIdSesion");
                 });
 
             modelBuilder.Entity("TeatroApi.Models.Reserva", b =>
@@ -329,7 +348,7 @@ namespace TeatroApi.Data.Migrations
                 {
                     b.HasOne("TeatroApi.Models.Obra", "Obra")
                         .WithMany("Sesiones")
-                        .HasForeignKey("IdSesion")
+                        .HasForeignKey("IdPlay")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

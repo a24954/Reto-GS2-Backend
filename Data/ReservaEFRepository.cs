@@ -46,7 +46,8 @@ namespace TeatroApi.Data
                 },
                 IdUser = reserva.IdUser,
                 IdSeats = reserva.IdSeats,
-                IdPlay = reserva.IdPlay
+                IdPlay = reserva.IdPlay,
+                ListaSeats = reserva.ListaSeats
             };
         }
 
@@ -90,7 +91,8 @@ namespace TeatroApi.Data
                 },
                 IdUser = r.IdUser,
                 IdSeats = r.IdSeats,
-                IdPlay = r.IdPlay
+                IdPlay = r.IdPlay,
+                ListaSeats = r.ListaSeats
             }).ToList();
         }
 

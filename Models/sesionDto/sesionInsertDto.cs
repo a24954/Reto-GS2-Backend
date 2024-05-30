@@ -2,7 +2,7 @@ namespace TeatroApi.Models
 {
     public class SesionInsertDto
     {
-        public int IdSesion { get; set; }
-        
+        public string SesionTime { get; set; }
+        public int IdPlay { get; set; }
     }
 }
