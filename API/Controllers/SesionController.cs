@@ -22,7 +22,7 @@ namespace TeatroApi.API.Controllers
             _sesionService.GetAll();
 
         [HttpGet("{id}")]
-        public ActionResult<SesionSimpleDto> Get(int id)
+        public ActionResult<List<SesionSimpleDto>?> Get(int id)
         {
             var sesion = _sesionService.Get(id);
 

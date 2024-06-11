@@ -24,7 +24,7 @@ namespace TeatroApi.Data
                 .ValueGeneratedOnAdd();
             
             modelBuilder.Entity<Reserva>()
-                .HasKey(r => new { r.IdReservation, r.IdPlay });
+                .HasKey(r => new { r.IdReservation, r.IdSesion });
 
             modelBuilder.Entity<Sesion>()
                 .HasKey(s => s.IdSesion);
@@ -50,9 +50,9 @@ namespace TeatroApi.Data
             );
 
             modelBuilder.Entity<Reserva>().HasData(
-                new Reserva { IdReservation = 1, User_Email = "user1@example.com", ReservationPrice = "100", ReservationDate = new DateTime(2024, 3, 20), IdUser = 1, IdPlay = 1, IdSeats = 1, ListaSeats = "['1']" },
-                new Reserva { IdReservation = 2, User_Email = "user2@example.com", ReservationPrice = "200", ReservationDate = new DateTime(2024, 3, 21), IdUser = 2, IdPlay = 1, IdSeats = 2, ListaSeats = "['2']" },
-                new Reserva { IdReservation = 3, User_Email = "user3@example.com", ReservationPrice = "300", ReservationDate = new DateTime(2024, 3, 22), IdUser = 3, IdPlay = 1, IdSeats = 3, ListaSeats = "['3']" }
+                new Reserva { IdReservation = 1, User_Email = "user1@example.com", ReservationPrice = "100", ReservationDate = new DateTime(2024, 3, 20), IdUser = 1, IdSesion = 1, ListaSeats = "['1']" },
+                new Reserva { IdReservation = 2, User_Email = "user2@example.com", ReservationPrice = "200", ReservationDate = new DateTime(2024, 3, 21), IdUser = 2, IdSesion = 1, ListaSeats = "['2']" },
+                new Reserva { IdReservation = 3, User_Email = "user3@example.com", ReservationPrice = "300", ReservationDate = new DateTime(2024, 3, 22), IdUser = 3, IdSesion = 1, ListaSeats = "['3']" }
             );
 
 

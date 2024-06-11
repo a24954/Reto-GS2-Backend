@@ -14,7 +14,7 @@ namespace TeatroApi.Business
         }
         public List<SesionSimpleDto> GetAll() => _sesionRepository.GetAll();
 
-        public SesionSimpleDto? Get(int id) => _sesionRepository.Get(id);
+        public List<SesionSimpleDto>? Get(int id) => _sesionRepository.Get(id);
 
         public void Add(Sesion sesion) => _sesionRepository.Add(sesion);
 

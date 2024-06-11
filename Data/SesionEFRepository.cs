@@ -17,8 +17,37 @@ namespace TeatroApi.Data
             SaveChanges();
         }
 
-        public SesionSimpleDto? Get(int sesionId)
+        public List<SesionSimpleDto>? Get(int sesionId)
         {
+
+            var sesiones = _context.Sesiones
+                .Include(s => s.Obra)
+                .Include(s => s.Asientos)
+                .Where(s => s.IdSesion == sesionId)
+                .ToList();
+
+            var sesionesdto = sesiones
+                .Select(s => new SesionSimpleDto
+                {
+                    IdSesion = s.IdSesion,
+                    SesionTime = s.SesionTime,
+                    Obra = new ObraSimpleDto
+                    {
+                        IdPlay = s.Obra.IdPlay,
+                        Name = s.Obra.Name,
+                        Description = s.Obra.Description,
+                        Photo = s.Obra.Photo,
+                        Price = s.Obra.Price,
+                        Duration = s.Obra.Duration
+                    },
+                    Asientos = s.Asientos.Select(a => new AsientosSimpleDto
+                    {
+                        IdSeats = a.IdSeats,
+                        Number = a.Number,
+                        Status = a.Status
+                    }).ToList()
+                }).ToList();
+            return sesionesdto;
 
             var asientos = _context.Asientos
             .Where(asientos => asientos.IdSeats == sesionId)
@@ -27,7 +56,7 @@ namespace TeatroApi.Data
                 IdSeats = r.IdSeats,
                 Number = r.Number,
                 Status = r.Status
-            }).FirstOrDefault();
+            }).ToList();
 
             var sesion = _context.Sesiones
             .Where(sesiones => sesiones.IdSesion == sesionId)
@@ -35,7 +64,8 @@ namespace TeatroApi.Data
             {
                 IdSesion = u.IdSesion,
                 SesionTime = u.SesionTime,
-            }).FirstOrDefault();
+                Asientos = asientos,
+            }).ToList();
             return sesion;
         }
 
@@ -76,6 +106,7 @@ namespace TeatroApi.Data
                     SesionTime = s.SesionTime,
                     Obra = new ObraSimpleDto
                     {
+                        IdPlay = s.Obra.IdPlay,
                         Name = s.Obra.Name,
                         Description = s.Obra.Description,
                         Photo = s.Obra.Photo,

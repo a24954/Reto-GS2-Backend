@@ -151,7 +151,7 @@ namespace TeatroApi.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdReservation"));
 
-                    b.Property<int>("IdPlay")
+                    b.Property<int>("IdSesion")
                         .HasColumnType("int");
 
                     b.Property<int>("IdSeats")
@@ -175,9 +175,7 @@ namespace TeatroApi.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("IdReservation", "IdPlay");
-
-                    b.HasIndex("IdPlay");
+                    b.HasKey("IdReservation", "IdSesion");
 
                     b.ToTable("Reservas");
 
@@ -185,7 +183,7 @@ namespace TeatroApi.Data.Migrations
                         new
                         {
                             IdReservation = 1,
-                            IdPlay = 1,
+                            IdSesion = 1,
                             IdSeats = 1,
                             IdUser = 1,
                             ListaSeats = "['1']",
@@ -196,7 +194,7 @@ namespace TeatroApi.Data.Migrations
                         new
                         {
                             IdReservation = 2,
-                            IdPlay = 1,
+                            IdSesion = 1,
                             IdSeats = 2,
                             IdUser = 2,
                             ListaSeats = "['2']",
@@ -207,7 +205,7 @@ namespace TeatroApi.Data.Migrations
                         new
                         {
                             IdReservation = 3,
-                            IdPlay = 1,
+                            IdSesion = 1,
                             IdSeats = 3,
                             IdUser = 3,
                             ListaSeats = "['3']",
@@ -331,17 +329,6 @@ namespace TeatroApi.Data.Migrations
                     b.HasOne("TeatroApi.Models.Sesion", null)
                         .WithMany("Asientos")
                         .HasForeignKey("SesionIdSesion");
-                });
-
-            modelBuilder.Entity("TeatroApi.Models.Reserva", b =>
-                {
-                    b.HasOne("TeatroApi.Models.Obra", "Obra")
-                        .WithMany()
-                        .HasForeignKey("IdPlay")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Obra");
                 });
 
             modelBuilder.Entity("TeatroApi.Models.Sesion", b =>

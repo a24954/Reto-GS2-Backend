@@ -22,7 +22,7 @@ namespace TeatroApi.API.Controllers
             _reservaService.GetAll();
 
         [HttpGet("{id}")]
-        public ActionResult<ReservaSimpleDto> Get(int id)
+        public ActionResult<List<ReservaSimpleDto>?> Get(int id)
         {
             var reserva = _reservaService.Get(id);
 
@@ -35,7 +35,7 @@ namespace TeatroApi.API.Controllers
         [HttpPost]
         public IActionResult Create(ReservaInsertDto reservadto)
         {
-            var reserva = new Reserva { User_Email = reservadto.User_Email, ReservationPrice = reservadto.ReservationPrice, ReservationDate = reservadto.ReservationDate, IdPlay = reservadto.IdPlay, ListaSeats = reservadto.ListaSeats };
+            var reserva = new Reserva { User_Email = reservadto.User_Email, ReservationPrice = reservadto.ReservationPrice, ReservationDate = reservadto.ReservationDate, IdSesion = reservadto.IdSesion, ListaSeats = reservadto.ListaSeats };
             _reservaService.Add(reserva);
             return CreatedAtAction(nameof(Get), new { id = reserva.IdReservation }, reserva);
         }

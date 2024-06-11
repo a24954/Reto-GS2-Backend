@@ -20,7 +20,6 @@ public class Reserva
 
     public int IdSeats { get; set; }
 
-    public int IdPlay { get; set; }
-    public virtual Obra Obra { get; set; }
+    public int IdSesion { get; set; }
 
 }

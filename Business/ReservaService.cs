@@ -14,7 +14,7 @@ namespace TeatroApi.Business
         }
         public List<ReservaSimpleDto> GetAll() => _reservaRepository.GetAll();
 
-        public ReservaSimpleDto? Get(int id) => _reservaRepository.Get(id);
+        public List<ReservaSimpleDto>? Get(int id) => _reservaRepository.Get(id);
 
         public void Add(Reserva reserva) => _reservaRepository.Add(reserva);
 

@@ -21,34 +21,22 @@ namespace TeatroApi.Data
             SaveChanges();
         }
 
-        public ReservaSimpleDto? Get(int reservaId)
+        public List<ReservaSimpleDto>? Get(int reservaId)
         {
-            var reserva = _context.Reservas
-                .Include(r => r.Obra)
-                .FirstOrDefault(r => r.IdReservation == reservaId);
-
-            if (reserva == null)
-                return null;
-
-            return new ReservaSimpleDto
+            var reservas = _context.Reservas
+            .Where(r => r.IdSesion == reservaId)
+            .Select(reserva => new ReservaSimpleDto
             {
                 IdReservation = reserva.IdReservation,
                 User_Email = reserva.User_Email,
                 ReservationPrice = reserva.ReservationPrice,
                 ReservationDate = reserva.ReservationDate,
-                Obra = new ObraSimpleDto
-                {
-                    Name = reserva.Obra.Name,
-                    Description = reserva.Obra.Description,
-                    Photo = reserva.Obra.Photo,
-                    Price = reserva.Obra.Price,
-                    Duration = reserva.Obra.Duration
-                },
                 IdUser = reserva.IdUser,
                 IdSeats = reserva.IdSeats,
-                IdPlay = reserva.IdPlay,
+                IdSesion = reserva.IdSesion,
                 ListaSeats = reserva.ListaSeats
-            };
+            }).ToList();
+            return reservas;
         }
 
         public void Update(Reserva reserva)
@@ -72,7 +60,6 @@ namespace TeatroApi.Data
         public List<ReservaSimpleDto> GetAll()
         {
             var reservas = _context.Reservas
-                .Include(r => r.Obra)
                 .ToList();
 
             return reservas.Select(r => new ReservaSimpleDto
@@ -81,17 +68,9 @@ namespace TeatroApi.Data
                 User_Email = r.User_Email,
                 ReservationPrice = r.ReservationPrice,
                 ReservationDate = r.ReservationDate,
-                Obra = new ObraSimpleDto
-                {
-                    Name = r.Obra.Name,
-                    Description = r.Obra.Description,
-                    Photo = r.Obra.Photo,
-                    Price = r.Obra.Price,
-                    Duration = r.Obra.Duration
-                },
                 IdUser = r.IdUser,
                 IdSeats = r.IdSeats,
-                IdPlay = r.IdPlay,
+                IdSesion = r.IdSesion,
                 ListaSeats = r.ListaSeats
             }).ToList();
         }
